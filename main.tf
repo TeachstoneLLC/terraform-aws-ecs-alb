@@ -140,6 +140,7 @@ resource "aws_lb_target_group" "lb_http_tgs" {
     interval            = var.target_group_health_check_interval
     path                = var.target_group_health_check_path
     protocol            = lookup(each.value, "target_group_protocol", "") == "" ? "HTTP" : each.value.target_group_protocol
+    port                = var.target_group_health_check_port == -1 ? each.value.target_group_port : var.target_group_health_check_port
     timeout             = var.target_group_health_check_timeout
     healthy_threshold   = var.target_group_health_check_healthy_threshold
     unhealthy_threshold = var.target_group_health_check_unhealthy_threshold
